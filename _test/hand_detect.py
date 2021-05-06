@@ -19,18 +19,25 @@ utils_ops.tf = tf.compat.v1
 tf.gfile = tf.io.gfile
 
 # ラベルマップのロード
-PATH_TO_LABELS = './inference/label_map.pbtxt'
+PATH_TO_LABELS = '../inference/label_map.pbtxt'
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
 # モデルのロード
-detection_model = tf.saved_model.load("./inference/saved_model")
+detection_model = tf.saved_model.load("../inference/saved_model")
 
 # Check the model's input signature, it expects a batch of 3-color images of type uint8:
+print('-------------------------')
 print(detection_model.signatures['serving_default'].inputs)
+print('-------------------------')
 
 # And returns several outputs:
+print('=========================')
+print(detection_model.signatures['serving_default'])
+print('=========================')
 print(detection_model.signatures['serving_default'].output_dtypes)
 print(detection_model.signatures['serving_default'].output_shapes)
+print('=========================')
+print(detection_model.signatures.keys())
 
 # 認識処理関数
 def run_inference_for_single_image(model, image):

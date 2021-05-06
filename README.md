@@ -44,18 +44,15 @@ pip install .
 cd ../../
 ```
 
+## ダウンロードしたモデルファイルを展開する
+hand_detect_XXXXXXXX_XXXXXX.zip を展開  
 
 ## テスト
 
 テストディレクトリに移動  
 ```
 cd _test
-```
 
-## ダウンロードしたモデルファイルを展開する
-hand_detect_XXXXXXXX_XXXXXX.zip を展開  
-
-```
 sh _test.sh
 ```
 または、任意の画像ファイルを指定して以下を実行
