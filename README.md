@@ -8,19 +8,22 @@ Tensorflow2環境でのSSDモデルの転移学習の手順を試してみた。
 
 
 # 転移学習の実行
-HandDetector.ipynb をGoogle Colaboratory で実行
+tf2_TransferLearning.ipynb をGoogle Colaboratory で実行
 
 # 実行完了をひたすら待つ
-試したときは3時間くらｋかかった
+結構時間がかかる(時間単位)けど、マシンの割り当て条件等によって変わってくる。
+
 コマンド実行終了した後、ほったらかしておくと
 「あんたロボットと違う？」と聞かれ、ちゃんと答えないと接続切られちゃうので注意。  
-(スタートして寝たり出掛けたりしちゃうと、せっかく学習終了したのに消えちゃうことも)  
+
+あまり長いことGPUを占有してると強制的に接続切られてしまうので(90分という情報もあるが、4時間くらい大丈夫だったこともある)、
+
 
 最初のセルを実行してカレントをGoogleDriveにしておくと接続切られても結果は残ってる。  
 でも、空き容量ないと動かないので注意。  
 
 ## 生成済みモデルファイルのダウンロード
-hand_detect_XXXXXXXX_XXXXXX.zip をダウンロード
+hand_detect/hand_detect_XXXXXXXX_XXXXXX.zip(VOCのときはhandをvocに読み替え) をダウンロード
 
 # ローカル環境でのテスト
 
@@ -28,7 +31,7 @@ hand_detect_XXXXXXXX_XXXXXX.zip をダウンロード
 
 ## python仮想環境設定
 ```
-pyenv virtualenv 3.7.10 hand_detect
+pyenv virtualenv 3.8.9 tensorflow2_py38
 pyenv local hand_detect
 pip install --upgrade pip setuptools
 ```
@@ -45,7 +48,7 @@ cd ../../
 ```
 
 ## ダウンロードしたモデルファイルを展開する
-hand_detect_XXXXXXXX_XXXXXX.zip を展開  
+[hand|voc]_detect_XXXXXXXX_XXXXXX.zip を展開  
 
 ## テスト
 
@@ -53,9 +56,11 @@ hand_detect_XXXXXXXX_XXXXXX.zip を展開
 ```
 cd _test
 
-sh _test.sh
+bash _hand_test.sh 
+# または
+bash _voc_test.sh 
 ```
 または、任意の画像ファイルを指定して以下を実行
 ```
-python hand_detect.py <<JPEGファイル>>
+python _test.py <<ラベルファイル>> <<saved_modelディレクトリ>> <<JPEGファイル>>
 ```

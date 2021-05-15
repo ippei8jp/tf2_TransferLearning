@@ -137,7 +137,10 @@ tmp*/
 .vscode/
 *.jpg
 models/
-inference/
+hand_detect*/
+voc_detect*/
+*output_training*/
 hand_detect_*.zip
+voc_detect_*.zip
 _IR/
 ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8/

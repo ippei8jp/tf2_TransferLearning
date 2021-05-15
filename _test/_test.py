@@ -18,12 +18,18 @@ utils_ops.tf = tf.compat.v1
 # Patch the location of gfile
 tf.gfile = tf.io.gfile
 
+
+# パラメータ
+LABEL_FILE = sys.argv[1]
+SAVED_DIR  = sys.argv[2]
+JPEG_FILE  = sys.argv[3]
+
 # ラベルマップのロード
-PATH_TO_LABELS = '../inference/label_map.pbtxt'
+PATH_TO_LABELS = LABEL_FILE
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
 # モデルのロード
-detection_model = tf.saved_model.load("../inference/saved_model")
+detection_model = tf.saved_model.load(SAVED_DIR)
 
 # Check the model's input signature, it expects a batch of 3-color images of type uint8:
 print('-------------------------')
@@ -101,5 +107,5 @@ def show_inference(model, image_path):
   cv2.destroyAllWindows()
 
 # 実行
-show_inference(detection_model, sys.argv[1])
+show_inference(detection_model, JPEG_FILE)
 
