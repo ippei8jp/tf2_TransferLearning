@@ -4,6 +4,14 @@ TARGET=COCO
 # TARGET=HAND
 # TARGET=VOC
 
+# pyenvでpythonのバージョンを切り替えたときの問題の対策  ==================================
+## 現在のpythonのバージョン取得
+# TMP_PYVER=`python -V |  sed -e "s/^.*\(3.[0-9]\{1,\}\).*$/\1/g"`
+TMP_PYVER=`python -c "import sys; v = sys.version_info; print(f'{v[0]}.{v[1]}')"`
+## PYTHONPATHの該当箇所を置換
+export PYTHONPATH=`echo $PYTHONPATH  | sed -e "s/\/python3\.[0-9]\{1,\}/\/python${TMP_PYVER}/g"`
+# =========================================================================================
+
 if [ "${TARGET}" == "COCO" ]; then
 
   # COCO
